@@ -1,9 +1,10 @@
 title: Survival Swimming Diary
 description: 기술, 철학, 예술을 담은 일지
 baseurl: ""
-url: "https://survivalswimmingdiary.com"
+url: "https://taehyun-kim-801.github.io"
 
 theme: minima
+future: true
 
 plugins:
   - jekyll-feed
