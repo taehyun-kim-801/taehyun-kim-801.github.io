@@ -1,0 +1,35 @@
+name: Jekyll Build and Deploy
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 변경사항이 푸시될 때 실행
+
+permissions:
+  contents: write  # 저장소 내용 수정 권한 추가
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1' # 최신 버전 사용
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Build Jekyll Site
+        run: bundle exec jekyll build -d _site
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # GitHub Pages 배포용 브랜치
+          folder: _site # 빌드된 사이트 폴더
